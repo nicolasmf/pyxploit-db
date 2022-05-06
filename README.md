@@ -10,6 +10,7 @@ A python package to search the exploit database from exploit-db.com
 >>> print(result)
 [['50888', 'Gitlab 14.9 - Authentication Bypass', 'webapps', 'Ruby', '2022-04-26', 0, 0, [], 'Greenwolf', 'https://www.exploit-db.com/exploits/50888'], ['50889', 'GitLab 14.9 - Stored Cross-Site Scripting (XSS)', 'webapps', 'Ruby', '2022-04-26', 0, 0, [], 'Greenwolf', 'https://www.exploit-db.com/exploits/50889']]
 ```
+### With _print=True
 
 ![Table Result](images/screenshot_table.png)
 
