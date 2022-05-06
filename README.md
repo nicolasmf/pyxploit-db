@@ -20,5 +20,6 @@ A python package to search the exploit database from exploit-db.com
 ## TODO
 
 - [x] searchEDB function
+  - [ ] Return a dictionnary rather than an array for readability purposes
 - [ ] searchCVE function
 - [ ] Create a package
