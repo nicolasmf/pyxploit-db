@@ -1,6 +1,6 @@
 # Pyxploit-db
 
-A python package to search the exploit database from exploit-db.com
+An exploit-db.com python API using advanced search with all possible filters.
 
 ## Future use
 
@@ -17,7 +17,7 @@ A python package to search the exploit database from exploit-db.com
 
 ![Table Result](images/screenshot_table.png)
 
-## TODO
+## TODO (WIP)
 
 - [x] searchEDB function
   - [ ] Return a dictionnary rather than an array for readability purposes
