@@ -10,13 +10,14 @@ HEADERS = {
 
 def searchEDB(
     title: str = "",
-    nb_results: int = None,
+    nb_results: int = 10,
     _type: str = "",
     platform: str = "",
     port: int | str = "",
     content: str = "",
     author: str = "",
     tag: int | str = "",
+    tag_verify: bool = True,
     verified: bool = "",
     hasapp: bool = "",
     nomsf: bool = "",
@@ -27,7 +28,7 @@ def searchEDB(
 
     Args:
         title (str, optional): The title or description of the exploit. Defaults to "".
-        nb_results (int, optional): The number of results to print/return. Defaults to None.
+        nb_results (int, optional): The maximum number of results to print/return. Defaults to 10.
         _type (str, optional): The exploit type. Possible types are [dos, local, remote, shellcode, papers, webapps]. Defaults to "".
         platform (str, optional): The platform in which the exploit is written. Defaults to "".
         port (int | str, optional): The exploit target port. Defaults to "".
@@ -36,6 +37,7 @@ def searchEDB(
         tag (int | str, optional): The exploit's tag. Possible tags are\n
         [WordPress Core, Metasploit Framework (MSF), WordPress Plugin, SQL Injection (SQLi), Cross-Site Scripting (XSS), File Inclusion (LFI/RFI), Cross-Site Request Forgery (CSRF), Denial of Service (DoS), Code Injection, Command Injection, Authentication Bypass / Credentials Bypass (AB/CB), Client Side, Use After Free (UAF), Out Of Bounds, Remote, Local, XML External Entity (XXE), Integer Overflow, Server-Side Request Forgery (SSRF), Race Condition, NULL Pointer Dereference, Malware, Buffer Overflow, Heap Overflow, Type Confusion, Object Injection, Bug Report, Console, Pwn2Own, Traversal, Deserialization].\n
         Defaults to "".
+        tag_verify (bool, optional): Make user choose between different tags if the tag string in argument is contained in multiple possible tags or checks if no tags where found with the user input. Defaults to True.
         verified (bool, optional): Search only verified / not verified exploits. Defaults to "".
         hasapp (bool, optional): Search only exploits that have / don't have  a vulnerable application attached . Defaults to "".
         nomsf (bool, optional): Search only exploits that use / don't use Metasploit Framework. Defaults to "".
@@ -44,7 +46,7 @@ def searchEDB(
     Returns:
         None or list: Prints the list of exploits found if _print is True, else it returns a list with
         exploits' information using this template :
-        [id, description, type, platform, date_published, verified, possible_tags, author, link]
+        [id, description, type, platform, date_published, verified, tag_if_any, author, link]
     """
 
     tags = {
@@ -81,19 +83,51 @@ def searchEDB(
         "41": "Deserialization",
     }
 
+    if tag != "":
+        possible_tags = []
+
+        for i in tags.values():
+            if tag.lower() in i.lower():
+                possible_tags.append(i)
+
+        if tag_verify:
+            if len(possible_tags) > 1:
+                print(
+                    "Multiple tag possibilities detected. Please choose one from this list :"
+                )
+                for idx, val in enumerate(possible_tags):
+                    print(f"{idx+1}. {val}")
+                while True:
+                    try:
+                        ans = possible_tags[int(input("Answer : ")) - 1]
+                    except ValueError:
+                        print("Please enter a number.")
+                        continue
+                    except IndexError:
+                        print(
+                            f"Please enter a number between 1 and {len(possible_tags)}"
+                        )
+                        continue
+                    break
+                tag = [k for k, v in tags.items() if v == ans][0]
+            elif len(possible_tags) == 0:
+                print(f'No tag found with string "{tag}".')
+            else:
+                tag = [k for k, v in tags.items() if v == possible_tags[0]][0]
+        else:
+            tag = [k for k, v in tags.items() if v == possible_tags[0]][0]
+
     verified, hasapp, nomsf = (
         str(verified).lower(),
         str(hasapp).lower(),
         str(nomsf).lower(),
     )
+
     url = f"https://www.exploit-db.com/search?q={title}&type={_type}&platform={platform}&port={port}&text={content}&e_author={author}&tag={tag}&verified={verified}&hasapp={hasapp}&nomsf={nomsf}"
 
     response = requests.get(url, headers=HEADERS)
     data = response.json()["data"]
-    if nb_results is None:
-        res_length = len(data)
-    else:
-        res_length = len(data) if (len(data) < nb_results) else nb_results
+    res_length = len(data) if (len(data) < nb_results) else nb_results
 
     if _print:
 
