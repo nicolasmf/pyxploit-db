@@ -20,7 +20,7 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ### With _print=True
 
-![Table Result](images/screenshot_table.png)
+![Table Result](https://media.discordapp.net/attachments/842511727324561429/972520026701705237/screenshot_table.png?width=1260&height=135)
 
 The full explanation of the functions can be found in the wiki or directly in the code.
 
