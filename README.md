@@ -8,12 +8,14 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ```python
 >>> import pyxploitdb
->>> result = pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", _print=False)
->>> print(result)
+>>>pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", _print=False)
 [['50888', 'Gitlab 14.9 - Authentication Bypass', 'webapps', 'Ruby', '2022-04-26', 0, 0, [],
 'Greenwolf', 'https://www.exploit-db.com/exploits/50888'], 
 ['50889', 'GitLab 14.9 - Stored Cross-Site Scripting (XSS)', 'webapps', 'Ruby',
 '2022-04-26', 0, 0, [], 'Greenwolf', 'https://www.exploit-db.com/exploits/50889']]
+>>>pyxploitdb.searchCVE("CVE-2006-1234")
+['27423', "DSCounter 1.2 - 'index.php' SQL Injection", 'webapps', 'PHP', '2006-03-14', 1, 0, [], 
+'Aliaksandr Hartsuyeu', 'https://www.exploit-db.com/exploits/27423']
 ```
 
 ### With _print=True
