@@ -3,7 +3,6 @@
 ![version](https://img.shields.io/pypi/v/pyxploitdb?label=version)
 ![license](https://img.shields.io/pypi/l/pyxploitdb)
 
-
 ![image](https://cdn.discordapp.com/attachments/972604017261830176/972604672676352000/pyxploitdb.png)
 
 An exploit-db.com python API using advanced search with all possible filters.
