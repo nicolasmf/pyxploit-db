@@ -44,7 +44,7 @@ def searchEDB(
         _print (bool, optional): Switch to print or not a table with results. Defaults to False.
 
     Returns:
-        None or list: Prints the list of exploits found if _print is True, else it returns a list with
+        list: Prints the list of exploits found if _print is True and returns a list with
         exploits' information using this template :
         [id, description, type, platform, date_published, verified, tag_if_any, author, link]
     """
@@ -143,7 +143,7 @@ def searchEDB(
                 table.add_row(
                     f'[{data[i]["author"]["name"]}] {data[i]["description"][1]}',
                     data[i]["date_published"],
-                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+                    f"https://www.exploit-db.com/exploits/{data[i]['id']}",
                     data[i]["platform_id"],
                     "✅" if data[i]["verified"] == 1 else "❌",
                 )
@@ -151,24 +151,23 @@ def searchEDB(
         else:
             print("No exploits found.")
 
-    else:
-        results = []
-        for i in range(res_length):
-            results.append(
-                [
-                    data[i]["id"],
-                    data[i]["description"][1],
-                    data[i]["type_id"],
-                    data[i]["platform_id"],
-                    data[i]["date_published"],
-                    data[i]["verified"],
-                    data[i]["port"],
-                    data[i]["tags"],
-                    data[i]["author"]["name"],
-                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
-                ]
-            )
-        return results
+    results = []
+    for i in range(res_length):
+        results.append(
+            [
+                data[i]["id"],
+                data[i]["description"][1],
+                data[i]["type_id"],
+                data[i]["platform_id"],
+                data[i]["date_published"],
+                data[i]["verified"],
+                data[i]["port"],
+                data[i]["tags"],
+                data[i]["author"]["name"],
+                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+            ]
+        )
+    return results
 
 
 def searchCVE(cve: str) -> list:
