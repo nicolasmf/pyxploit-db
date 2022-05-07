@@ -25,6 +25,6 @@ The full explanation of the functions can be found in the wiki or directly in th
 ## TODO (WIP)
 
 - [x] searchEDB function
-- [ ] searchCVE function
+- [x] searchCVE function
 - [ ] Create a wiki
 - [ ] Create a package

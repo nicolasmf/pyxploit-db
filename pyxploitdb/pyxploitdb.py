@@ -1,4 +1,4 @@
-import requests
+import requests, re
 from rich.console import Console
 from rich.table import Table
 
@@ -169,3 +169,45 @@ def searchEDB(
                 ]
             )
         return results
+
+
+def searchCVE(cve: str) -> list:
+    """
+    Searches exploit-db.com CVE.
+
+    Args:
+        cve (str): The CVE to search.
+
+    Returns:
+        list: A list with the CVE's information using this template :
+        [id, description, type, platform, date_published, verified, tag_if_any, author, link]
+    """
+
+    # CVE string verification
+    CVE_regex = re.compile(r"\d{4}-\d{4,7}")
+    if CVE_regex.search(cve) is None:
+        print("Please input a valid CVE (YYYY-1234567).")
+        return
+    else:
+        cve = CVE_regex.search(cve).group()
+
+    url = f"https://www.exploit-db.com/search?cve={cve}"
+    response = requests.get(url, headers=HEADERS)
+    data = response.json()["data"][0]
+
+    results = []
+    results.append(
+        [
+            data["id"],
+            data["description"][1],
+            data["type_id"],
+            data["platform_id"],
+            data["date_published"],
+            data["verified"],
+            data["port"],
+            data["tags"],
+            data["author"]["name"],
+            f"https://www.exploit-db.com/exploits/{data['id']}",
+        ]
+    )
+    return results[0]
