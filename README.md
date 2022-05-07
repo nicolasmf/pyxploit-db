@@ -4,7 +4,11 @@ An exploit-db.com python API using advanced search with all possible filters.
 
 For another project, I needed to make some queries to the exploit database, but I couldn't find any complete API that would allow me to get what I wanted, how I wanted. So I decided to create my own API, and making it as complete as possible, with the maximum of parameters so everyone will find what they need and how they need it.
 
-## Future use
+## How to use
+
+`$ pip install pyxploitdb`
+
+### Examples
 
 ```python
 >>> import pyxploitdb
