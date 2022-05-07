@@ -6,7 +6,7 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ## How to use
 
-`$ pip install pyxploitdb`
+`$ python3 -m pip install pyxploitdb`
 
 ### Examples
 
@@ -26,11 +26,15 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ![Table Result](https://media.discordapp.net/attachments/842511727324561429/972520026701705237/screenshot_table.png?width=1260&height=135)
 
-The full explanation of the functions can be found in the wiki or directly in the code.
+***
 
-## TODO (WIP)
+A full explanation of the functions can be found in the [wiki](https://github.com/nicolasmf/pyxploit-db/wiki) or directly in the code.
+
+***
+
+## TODO
 
 - [x] searchEDB function
 - [x] searchCVE function
 - [x] Create a package
-- [ ] Create a wiki
+- [x] Create a wiki

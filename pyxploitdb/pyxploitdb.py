@@ -22,7 +22,7 @@ def searchEDB(
     hasapp: bool = "",
     nomsf: bool = "",
     _print: bool = False,
-) -> None or list:
+) -> list:
     """
     Searches exploit-db.com using advanced search, with all possible filters.
 
@@ -37,14 +37,14 @@ def searchEDB(
         tag (int | str, optional): The exploit's tag. Possible tags are\n
         [WordPress Core, Metasploit Framework (MSF), WordPress Plugin, SQL Injection (SQLi), Cross-Site Scripting (XSS), File Inclusion (LFI/RFI), Cross-Site Request Forgery (CSRF), Denial of Service (DoS), Code Injection, Command Injection, Authentication Bypass / Credentials Bypass (AB/CB), Client Side, Use After Free (UAF), Out Of Bounds, Remote, Local, XML External Entity (XXE), Integer Overflow, Server-Side Request Forgery (SSRF), Race Condition, NULL Pointer Dereference, Malware, Buffer Overflow, Heap Overflow, Type Confusion, Object Injection, Bug Report, Console, Pwn2Own, Traversal, Deserialization].\n
         Defaults to "".
-        tag_verify (bool, optional): Make user choose between different tags if the tag string in argument is contained in multiple possible tags or checks if no tags where found with the user input. Defaults to True.
-        verified (bool, optional): Search only verified / not verified exploits. Defaults to "".
-        hasapp (bool, optional): Search only exploits that have / don't have  a vulnerable application attached . Defaults to "".
+        tag_verify (bool, optional): Make user choose between different tags if the tag string in argument is contained in multiple possible tags or checks if no tags were found with the user input. Defaults to True.
+        verified (bool, optional): Search only verified / unverified exploits. Defaults to "".
+        hasapp (bool, optional): Search only exploits that have / don't have  a vulnerable application attached. Defaults to "".
         nomsf (bool, optional): Search only exploits that use / don't use Metasploit Framework. Defaults to "".
-        _print (bool, optional): Switch to print or not a table with results. Defaults to False.
+        _print (bool, optional): Switch to print  a table with results. Defaults to False.
 
     Returns:
-        list: Prints the list of exploits found if _print is True and returns a list with
+        list: Prints the list of exploits found if _print is True and returns a list of
         exploits' information using this template :
         [id, description, type, platform, date_published, verified, tag_if_any, author, link]
     """
@@ -175,7 +175,7 @@ def searchCVE(cve: str) -> list:
     Searches exploit-db.com CVE.
 
     Args:
-        cve (str): The CVE to search.
+        cve (str): The CVE to search. The argument can be given in 2 different forms : CVE-1234-1234 or 1234-1234.
 
     Returns:
         list: A list with the CVE's information using this template :
@@ -192,21 +192,23 @@ def searchCVE(cve: str) -> list:
 
     url = f"https://www.exploit-db.com/search?cve={cve}"
     response = requests.get(url, headers=HEADERS)
-    data = response.json()["data"][0]
+    data = response.json()["data"]
+    res_length = len(data)
 
     results = []
-    results.append(
-        [
-            data["id"],
-            data["description"][1],
-            data["type_id"],
-            data["platform_id"],
-            data["date_published"],
-            data["verified"],
-            data["port"],
-            data["tags"],
-            data["author"]["name"],
-            f"https://www.exploit-db.com/exploits/{data['id']}",
-        ]
-    )
-    return results[0]
+    for i in range(res_length):
+        results.append(
+            [
+                data[i]["id"],
+                data[i]["description"][1],
+                data[i]["type_id"],
+                data[i]["platform_id"],
+                data[i]["date_published"],
+                data[i]["verified"],
+                data[i]["port"],
+                data[i]["tags"],
+                data[i]["author"]["name"],
+                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+            ]
+        )
+    return results
