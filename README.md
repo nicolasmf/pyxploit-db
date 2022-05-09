@@ -1,7 +1,6 @@
 # Pyxploit-db
 
 ![downloads](https://img.shields.io/pypi/dm/pyxploitdb)
-![version](https://img.shields.io/pypi/v/pyxploitdb?label=version)
 ![license](https://img.shields.io/pypi/l/pyxploitdb)
 
 ![image](https://cdn.discordapp.com/attachments/972604017261830176/972604672676352000/pyxploitdb.png)
