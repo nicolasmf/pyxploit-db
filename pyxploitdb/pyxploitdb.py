@@ -46,7 +46,7 @@ def searchEDB(
     Returns:
         list: Prints the list of exploits found if _print is True and returns a list of
         exploits' information using this template :
-        [id, description, type, platform, date_published, verified, tag_if_any, author, link]
+        [id, description, type, platform, date_published, verified, port, tag_if_any, author, link]
     """
 
     tags = {
