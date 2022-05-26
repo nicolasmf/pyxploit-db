@@ -1,7 +1,7 @@
 import requests, re
 from rich.console import Console
 from rich.table import Table
-from exploit import Exploit
+from .exploit import Exploit
 
 HEADERS = {
     "User-Agent": "pyxploitdb",
@@ -23,7 +23,7 @@ def searchEDB(
     hasapp: bool = "",
     nomsf: bool = "",
     _print: bool = False,
-) -> list:
+) -> list[Exploit]:
     """
     Searches exploit-db.com using advanced search, with all possible filters.
 
@@ -45,9 +45,7 @@ def searchEDB(
         _print (bool, optional): Switch to print  a table with results. Defaults to False.
 
     Returns:
-        list: Prints the list of exploits found if _print is True and returns a list of
-        exploits' information using this template :
-        [id, description, type, platform, date_published, verified, port, tag_if_any, author, link]
+        list[Exploit]: Prints the list of exploits found if _print is True and returns a list of Exploit objects.
     """
 
     tags = {
@@ -156,22 +154,24 @@ def searchEDB(
     for i in range(res_length):
         results.append(
             [
-                data[i]["id"],
-                data[i]["description"][1],
-                data[i]["type_id"],
-                data[i]["platform_id"],
-                data[i]["date_published"],
-                data[i]["verified"],
-                data[i]["port"],
-                data[i]["tags"],
-                data[i]["author"]["name"],
-                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+                Exploit(
+                    data[i]["id"],
+                    data[i]["description"][1],
+                    data[i]["type_id"],
+                    data[i]["platform_id"],
+                    data[i]["date_published"],
+                    data[i]["verified"],
+                    data[i]["port"],
+                    data[i]["tags"],
+                    data[i]["author"]["name"],
+                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+                )
             ]
         )
     return results
 
 
-def searchCVE(cve: str) -> list:
+def searchCVE(cve: str) -> list[Exploit]:
     """
     Searches exploit-db.com CVE.
 
@@ -179,8 +179,7 @@ def searchCVE(cve: str) -> list:
         cve (str): The CVE to search. The argument can be given in 2 different forms : CVE-1234-1234 or 1234-1234.
 
     Returns:
-        list: A list with the CVE's information using this template :
-        [id, description, type, platform, date_published, verified, tag_if_any, author, link]
+        list[Exploit]: A list of Exploit objects.
     """
 
     # CVE string verification
@@ -200,16 +199,18 @@ def searchCVE(cve: str) -> list:
     for i in range(res_length):
         results.append(
             [
-                data[i]["id"],
-                data[i]["description"][1],
-                data[i]["type_id"],
-                data[i]["platform_id"],
-                data[i]["date_published"],
-                data[i]["verified"],
-                data[i]["port"],
-                data[i]["tags"],
-                data[i]["author"]["name"],
-                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+                Exploit(
+                    data[i]["id"],
+                    data[i]["description"][1],
+                    data[i]["type_id"],
+                    data[i]["platform_id"],
+                    data[i]["date_published"],
+                    data[i]["verified"],
+                    data[i]["port"],
+                    data[i]["tags"],
+                    data[i]["author"]["name"],
+                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+                )
             ]
         )
     return results
