@@ -1,6 +1,7 @@
 import requests, re
 from rich.console import Console
 from rich.table import Table
+from exploit import Exploit
 
 HEADERS = {
     "User-Agent": "pyxploitdb",
