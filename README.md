@@ -17,14 +17,14 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ```python
 >>> import pyxploitdb
->>> pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", _print=False)
-[['50888', 'Gitlab 14.9 - Authentication Bypass', 'webapps', 'Ruby', '2022-04-26',
-0, 0, [], 'Greenwolf', 'https://www.exploit-db.com/exploits/50888'], 
-['50889', 'GitLab 14.9 - Stored Cross-Site Scripting (XSS)', 'webapps', 'Ruby',
-'2022-04-26', 0, 0, [], 'Greenwolf', 'https://www.exploit-db.com/exploits/50889']]
+>>> pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", _print=False, nb_results=1)
+[Exploit(id='50888', description='Gitlab 14.9 - Authentication Bypass', 
+type='webapps', platform='Ruby', date_published='2022-04-26', verified=0, 
+port=0, tag_if_any=[], author='Greenwolf', link='https://www.exploit-db.com/exploits/50888')]
 >>> pyxploitdb.searchCVE("CVE-2006-1234")
-['27423', "DSCounter 1.2 - 'index.php' SQL Injection", 'webapps', 'PHP', '2006-03-14',
-1, 0, [], 'Aliaksandr Hartsuyeu', 'https://www.exploit-db.com/exploits/27423']
+[[Exploit(id='27423', description='DSCounter 1.2 - &#039;index.php&#039; SQL Injection', 
+type='webapps', platform='PHP', date_published='2006-03-14', verified=1, port=0, 
+tag_if_any=[], author='Aliaksandr Hartsuyeu', link='https://www.exploit-db.com/exploits/27423')]]
 ```
 
 ### With _print=True

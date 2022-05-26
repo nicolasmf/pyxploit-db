@@ -153,20 +153,18 @@ def searchEDB(
     results = []
     for i in range(res_length):
         results.append(
-            [
-                Exploit(
-                    data[i]["id"],
-                    data[i]["description"][1],
-                    data[i]["type_id"],
-                    data[i]["platform_id"],
-                    data[i]["date_published"],
-                    data[i]["verified"],
-                    data[i]["port"],
-                    data[i]["tags"],
-                    data[i]["author"]["name"],
-                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
-                )
-            ]
+            Exploit(
+                data[i]["id"],
+                data[i]["description"][1],
+                data[i]["type_id"],
+                data[i]["platform_id"],
+                data[i]["date_published"],
+                data[i]["verified"],
+                data[i]["port"],
+                data[i]["tags"],
+                data[i]["author"]["name"],
+                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+            )
         )
     return results
 
@@ -198,19 +196,17 @@ def searchCVE(cve: str) -> list[Exploit]:
     results = []
     for i in range(res_length):
         results.append(
-            [
-                Exploit(
-                    data[i]["id"],
-                    data[i]["description"][1],
-                    data[i]["type_id"],
-                    data[i]["platform_id"],
-                    data[i]["date_published"],
-                    data[i]["verified"],
-                    data[i]["port"],
-                    data[i]["tags"],
-                    data[i]["author"]["name"],
-                    f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
-                )
-            ]
+            Exploit(
+                data[i]["id"],
+                data[i]["description"][1],
+                data[i]["type_id"],
+                data[i]["platform_id"],
+                data[i]["date_published"],
+                data[i]["verified"],
+                data[i]["port"],
+                data[i]["tags"],
+                data[i]["author"]["name"],
+                f"https://www.exploit-db.com/exploits/{response.json()['data'][i]['id']}",
+            )
         )
     return results
