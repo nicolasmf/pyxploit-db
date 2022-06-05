@@ -22,7 +22,7 @@ For another project, I needed to make some queries to the exploit database, but 
 type='webapps', platform='Ruby', date_published='2022-04-26', verified=0, 
 port=0, tag_if_any=[], author='Greenwolf', link='https://www.exploit-db.com/exploits/50888')]
 >>> pyxploitdb.searchCVE("CVE-2006-1234")
-[Exploit(id='27423', description='DSCounter 1.2 - &#039;index.php&#039; SQL Injection', 
+[Exploit(id='27423', description='DSCounter 1.2 - \'index.php\' SQL Injection', 
 type='webapps', platform='PHP', date_published='2006-03-14', verified=1, port=0, 
 tag_if_any=[], author='Aliaksandr Hartsuyeu', link='https://www.exploit-db.com/exploits/27423')]
 ```
