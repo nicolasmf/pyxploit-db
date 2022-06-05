@@ -198,7 +198,7 @@ def searchCVE(cve: str) -> list[Exploit]:
         results.append(
             Exploit(
                 data[i]["id"],
-                data[i]["description"][1],
+                data[i]["description"][1].replace("&#039;", "'"),
                 data[i]["type_id"],
                 data[i]["platform_id"],
                 data[i]["date_published"],
