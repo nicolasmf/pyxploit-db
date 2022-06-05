@@ -1,1 +1,1 @@
-from .pyxploitdb import searchCVE, searchEDB
+from .pyxploitdb import search_cve, search_edb
