@@ -17,13 +17,13 @@ For another project, I needed to make some queries to the exploit database, but 
 
 ```python
 >>> import pyxploitdb
->>> pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", _print=False, nb_results=1)
-[Exploit(id='50888', description='Gitlab 14.9 - Authentication Bypass', 
-type='webapps', platform='Ruby', date_published='2022-04-26', verified=0, 
+>>> pyxploitdb.searchEDB("Gitlab 14.9", platform="ruby", print_=False, nb_results=1)
+[Exploit(id_='50888', description='Gitlab 14.9 - Authentication Bypass', 
+type_='webapps', platform='Ruby', date_published='2022-04-26', verified=0, 
 port=0, tag_if_any=[], author='Greenwolf', link='https://www.exploit-db.com/exploits/50888')]
 >>> pyxploitdb.searchCVE("CVE-2006-1234")
-[Exploit(id='27423', description='DSCounter 1.2 - \'index.php\' SQL Injection', 
-type='webapps', platform='PHP', date_published='2006-03-14', verified=1, port=0, 
+[Exploit(id_='27423', description='DSCounter 1.2 - \'index.php\' SQL Injection', 
+type_='webapps', platform='PHP', date_published='2006-03-14', verified=1, port=0, 
 tag_if_any=[], author='Aliaksandr Hartsuyeu', link='https://www.exploit-db.com/exploits/27423')]
 ```
 
